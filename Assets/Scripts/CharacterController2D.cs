@@ -13,7 +13,6 @@ public class CharacterController2D : MonoBehaviour
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
@@ -42,34 +41,34 @@ public class CharacterController2D : MonoBehaviour
 	public void Move(float move, bool crouch, bool jump)
 	{
 		// If crouching, check to see if the character can stand up
-		if (!crouch)
-		{
-			// If the character has a ceiling preventing them from standing up, keep them crouching
-			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-			{
-				crouch = true;
-			}
-		}
+		//if (!crouch)
+		//{
+		//	// If the character has a ceiling preventing them from standing up, keep them crouching
+		//	if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+		//	{
+		//		crouch = true;
+		//	}
+		//}
 
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
 
-			// If crouching
-			if (crouch)
-			{
-				// Reduce the speed by the crouchSpeed multiplier
-				move *= m_CrouchSpeed;
+			//// If crouching
+			//if (crouch)
+			//{
+			//	// Reduce the speed by the crouchSpeed multiplier
+			//	move *= m_CrouchSpeed;
 
-				// Disable one of the colliders when crouching
-				if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = false;
-			} else
-			{
-				// Enable the collider when not crouching
-				if (m_CrouchDisableCollider != null)
-					m_CrouchDisableCollider.enabled = true;
-			}
+			//	// Disable one of the colliders when crouching
+			//	if (m_CrouchDisableCollider != null)
+			//		m_CrouchDisableCollider.enabled = false;
+			//} else
+			//{
+			//	// Enable the collider when not crouching
+			//	if (m_CrouchDisableCollider != null)
+			//		m_CrouchDisableCollider.enabled = true;
+			//}
 
 			// Move the character by finding the target velocity
 			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);

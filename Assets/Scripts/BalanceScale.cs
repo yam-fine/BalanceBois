@@ -7,9 +7,11 @@ public class BalanceScale : MonoBehaviour
     [SerializeField] Transform leftGoal, rightGoal;
     [SerializeField] int motorForce;
     [SerializeField] float resetValue;
+    
     GameManager gm;
     HingeJoint2D hj;
     JointMotor2D jm;
+    float epsilon = 0.01f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +22,9 @@ public class BalanceScale : MonoBehaviour
     }
 
     private void Update() {
-        //if (Mathf.Abs(transform.rotation.z) <= resetValue)
-        //    Reset();
-
-        if (transform.rotation.z < 0)
-             jm.motorSpeed = -motorForce;
-        else if (transform.rotation.z > 0)
+        if (transform.rotation.z < -epsilon)
+            jm.motorSpeed = -motorForce;
+        else if (transform.rotation.z > epsilon)
             jm.motorSpeed = motorForce;
         else
             jm.motorSpeed = 0;
@@ -39,9 +38,5 @@ public class BalanceScale : MonoBehaviour
             else
                 gm.RightScore++;
         }
-    }
-
-    private void Reset() {
-        transform.rotation = Quaternion.identity;
     }
 }
