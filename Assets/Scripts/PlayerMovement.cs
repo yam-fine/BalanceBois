@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 2f;
+    [SerializeField] KeyCode left, right, jump;
 
-    private bool jump = false;
+    private bool jumping = false;
     private float horizontalMove = 0f;
     CharacterController2D controller;
 
@@ -17,17 +18,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = (Input.GetKeyDown(left)) ? -1 : 0; //Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove += (Input.GetKeyDown(right)) ? 1 : 0;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(jump))
         {
-            jump = true;
+            jumping = true;
         }
     }
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime , false, jump);
-        jump = false;
+        controller.Move(horizontalMove * Time.fixedDeltaTime , false, jumping);
+        jumping = false;
     }
 }
