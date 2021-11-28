@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text uiScoreLeft, uiScoreRight;
 
     int leftScore, rightScore;
+    Player[] players;
+    BalanceScale bs;
 
     public int LeftScore { get { return leftScore; } set { leftScore = value; uiScoreLeft.text = leftScore.ToString(); } }
     public int RightScore { get { return rightScore; } set { rightScore = value; uiScoreRight.text = rightScore.ToString(); } }
@@ -26,7 +28,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        players = GameObject.FindObjectsOfType<Player>();
+        bs = GameObject.FindObjectOfType<BalanceScale>();
     }
 
     // Update is called once per frame
@@ -34,5 +37,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("SampleScene");
+    }
+
+    public void ResetLevel() {
+        foreach (Player p in players) {
+            p.Reset();
+        }
+        bs.Reset();
     }
 }

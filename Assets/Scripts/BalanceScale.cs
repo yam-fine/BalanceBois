@@ -37,6 +37,11 @@ public class BalanceScale : MonoBehaviour
                 gm.LeftScore++;
             else
                 gm.RightScore++;
+            gm.ResetLevel();
         }
+    }
+
+    public void Reset() {
+        transform.rotation = Quaternion.identity;
     }
 }
