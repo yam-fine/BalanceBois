@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontalMove = (Input.GetKeyDown(left)) ? -1 : 0; //Input.GetAxisRaw("Horizontal") * runSpeed;
-        horizontalMove += (Input.GetKeyDown(right)) ? 1 : 0;
+        horizontalMove = (Input.GetKey(left)) ? -1 : 0; //Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove += (Input.GetKey(right)) ? 1 : 0;
 
         if (Input.GetKeyDown(jump))
         {
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime , false, jumping);
+        controller.Move(horizontalMove * Time.fixedDeltaTime * runSpeed, false, jumping);
         jumping = false;
     }
 }
