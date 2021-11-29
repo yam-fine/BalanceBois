@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] TMP_Text uiScoreLeft, uiScoreRight;
+    [SerializeField] TMP_Text uiScoreLeft, uiScoreRight, countdownTime;
+    [SerializeField] int gameTime = 60;
 
     int leftScore, rightScore;
     Player[] players;
     BalanceScale bs;
+    float currTime;
 
     public int LeftScore { get { return leftScore; } set { leftScore = value; uiScoreLeft.text = leftScore.ToString(); } }
     public int RightScore { get { return rightScore; } set { rightScore = value; uiScoreRight.text = rightScore.ToString(); } }
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         players = GameObject.FindObjectsOfType<Player>();
         bs = GameObject.FindObjectOfType<BalanceScale>();
+        currTime = gameTime;
     }
 
     // Update is called once per frame
@@ -37,6 +40,21 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("SampleScene");
+
+        CountdownTimer();
+    }
+
+    void CountdownTimer() {
+        currTime -= Time.deltaTime;
+        countdownTime.text = Mathf.CeilToInt(currTime).ToString();
+        if (currTime <= 0) {
+            currTime = 0;
+            GameOver();
+        }
+    }
+
+    void GameOver() {
+
     }
 
     public void ResetLevel() {

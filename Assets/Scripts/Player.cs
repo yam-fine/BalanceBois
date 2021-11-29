@@ -9,4 +9,12 @@ public class Player : MonoBehaviour
     public void Reset() {
         transform.position = spawnPoint.position;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log(collision.name);
+        if (collision.tag == "Pickupable") {
+            collision.GetComponent<Pickupable>().OnPickup(this);
+            Destroy(collision);
+        }
+    }
 }
