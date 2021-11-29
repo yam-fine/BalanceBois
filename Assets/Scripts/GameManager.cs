@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] TMP_Text uiScoreLeft, uiScoreRight, countdownTime;
     [SerializeField] int gameTime = 60;
+    [SerializeField] float gameOverDelay;
 
     int leftScore, rightScore;
     Player[] players;
+    List<Rigidbody2D> rbs;
     BalanceScale bs;
-    float currTime;
+    float currTime, defaultWeight;
 
     public int LeftScore { get { return leftScore; } set { leftScore = value; uiScoreLeft.text = leftScore.ToString(); } }
     public int RightScore { get { return rightScore; } set { rightScore = value; uiScoreRight.text = rightScore.ToString(); } }
@@ -33,13 +35,18 @@ public class GameManager : MonoBehaviour
         players = GameObject.FindObjectsOfType<Player>();
         bs = GameObject.FindObjectOfType<BalanceScale>();
         currTime = gameTime;
+        defaultWeight = players[0].GetComponent<Rigidbody2D>().mass;
+        rbs = new List<Rigidbody2D>();
+        foreach (Player p in players) {
+            rbs.Add(p.GetComponent<Rigidbody2D>());
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("SampleScene");
+            Application.Quit();
 
         CountdownTimer();
     }
@@ -54,13 +61,25 @@ public class GameManager : MonoBehaviour
     }
 
     void GameOver() {
+        StartCoroutine(timer());
+    }
 
+    IEnumerator timer() {
+        float time = 0;
+        while (time < gameOverDelay) {
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        // DELAY IS OVER
     }
 
     public void ResetLevel() {
-        foreach (Player p in players) {
+        foreach (Player p in players)
             p.Reset();
-        }
+        foreach (Rigidbody2D rb in rbs)
+            rb.mass = defaultWeight;
         bs.Reset();
+        foreach (GameObject pickup in GameObject.FindGameObjectsWithTag("Pickupable"))
+            Destroy(pickup);
     }
 }
