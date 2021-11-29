@@ -34,9 +34,9 @@ public class BalanceScale : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Goal") {
             if (collision.name == leftGoal.name)
-                gm.LeftScore++;
-            else
                 gm.RightScore++;
+            else
+                gm.LeftScore++;
             gm.ResetLevel();
         }
     }
