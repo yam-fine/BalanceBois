@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] TMP_Text uiScoreLeft, uiScoreRight, countdownTime;
     [SerializeField] int gameTime = 60;
+    [SerializeField] float gameOverDelay;
 
     int leftScore, rightScore;
     Player[] players;
@@ -54,7 +55,16 @@ public class GameManager : MonoBehaviour
     }
 
     void GameOver() {
+        StartCoroutine(timer());
+    }
 
+    IEnumerator timer() {
+        float time = 0;
+        while (time < gameOverDelay) {
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        // DELAY IS OVER
     }
 
     public void ResetLevel() {
