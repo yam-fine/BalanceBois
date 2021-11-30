@@ -5,19 +5,20 @@ using UnityEngine;
 public class Acrobat : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] float spawnRate;
+    [SerializeField] float maxSpawnRate, minSpawnRate;
     [SerializeField] SpriteRenderer balanceScale;
     [SerializeField] float acrobatHeight;
     [SerializeField] List<GameObject> buffs;
 
     Vector2 leftTarget, rightTarget;
     bool goingRight = false;
-    float timeToSpawn;
+    float timeToSpawn, currTimeToSpawn;
 
     private void Start() {
         leftTarget = new Vector2(-(balanceScale.bounds.size.x / 2), balanceScale.transform.position.y + acrobatHeight);
         rightTarget = leftTarget;
         rightTarget.x *= -1;
+        currTimeToSpawn = Random.Range(minSpawnRate, maxSpawnRate);
     }
 
     void Update()
@@ -28,12 +29,13 @@ public class Acrobat : MonoBehaviour
     }
 
     void SpawnBuffs() {
-        if (timeToSpawn < spawnRate) {
+        if (timeToSpawn < currTimeToSpawn) {
             timeToSpawn += Time.deltaTime;
         }
         else {
             timeToSpawn = 0;
             Instantiate(buffs[Random.Range(0, buffs.Count)], transform.position, Quaternion.identity);
+            currTimeToSpawn = Random.Range(minSpawnRate, maxSpawnRate);
         }
     }
 
