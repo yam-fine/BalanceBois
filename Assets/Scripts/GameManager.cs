@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        // DELAY IS OVER
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ResetLevel() {

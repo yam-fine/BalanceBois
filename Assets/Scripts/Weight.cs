@@ -8,6 +8,7 @@ public class Weight : MonoBehaviour, Pickupable
 
     public void OnPickup(Player player) {
         player.GetComponent<Rigidbody2D>().mass += weight;
+        player.GetComponent<CharacterController2D>().JumpForce += weight * 50;
         Destroy(gameObject);
     }
 }
