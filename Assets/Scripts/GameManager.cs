@@ -66,10 +66,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator timer() {
         float time = 0;
+        // ADD WHO WON
         while (time < gameOverDelay) {
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -81,5 +83,6 @@ public class GameManager : MonoBehaviour
         bs.Reset();
         foreach (GameObject pickup in GameObject.FindGameObjectsWithTag("Pickupable"))
             Destroy(pickup);
+        bs.Reset();
     }
 }

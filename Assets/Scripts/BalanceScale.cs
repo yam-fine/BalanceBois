@@ -12,6 +12,7 @@ public class BalanceScale : MonoBehaviour
     HingeJoint2D hj;
     JointMotor2D jm;
     float epsilon = 0.01f;
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class BalanceScale : MonoBehaviour
         gm = GameManager.Instance;
         hj = GetComponent<HingeJoint2D>();
         jm = hj.motor;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
@@ -43,5 +45,8 @@ public class BalanceScale : MonoBehaviour
 
     public void Reset() {
         transform.rotation = Quaternion.identity;
+        jm.motorSpeed = 0;
+        hj.motor = jm;
+        rb.angularVelocity = 0;
     }
 }
