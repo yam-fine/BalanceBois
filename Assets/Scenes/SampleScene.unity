@@ -734,7 +734,7 @@ HingeJoint2D:
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_UseMotor: 0
+  m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 100
@@ -843,7 +843,7 @@ MonoBehaviour:
   leftGoal: {fileID: 772538054}
   rightGoal: {fileID: 701157460}
   motorForce: 10
-  resetValue: 1.5
+  torqueForce: 300
 --- !u!1 &701157457
 GameObject:
   m_ObjectHideFlags: 0
