@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float runSpeed = 2f;
     [SerializeField] KeyCode left, right, jump;
 
+    public KeyCode JumpKey { get { return jump; } }
+
     private bool jumping = false;
     private float horizontalMove = 0f;
     CharacterController2D controller;

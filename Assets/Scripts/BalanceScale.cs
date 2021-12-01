@@ -9,8 +9,6 @@ public class BalanceScale : MonoBehaviour
     [SerializeField] float torqueForce;
     
     GameManager gm;
-    //HingeJoint2D hj;
-    //JointMotor2D jm;
     float epsilon = 0.01f;
     Rigidbody2D rb;
 
@@ -18,24 +16,16 @@ public class BalanceScale : MonoBehaviour
     void Start()
     {
         gm = GameManager.Instance;
-        //hj = GetComponent<HingeJoint2D>();
-        //jm = hj.motor;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
         if (transform.rotation.z < -epsilon) {
-            //jm.motorSpeed = -motorForce;
             rb.AddTorque(torqueForce);
         }
         else if (transform.rotation.z > epsilon) { 
-            //jm.motorSpeed = motorForce;
             rb.AddTorque(-torqueForce);
         }
-        //else { 
-        //    jm.motorSpeed = 0;
-        //}
-        //hj.motor = jm;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -50,8 +40,6 @@ public class BalanceScale : MonoBehaviour
 
     public void Reset() {
         transform.rotation = Quaternion.identity;
-        //jm.motorSpeed = 0;
-        //hj.motor = jm;
         rb.angularVelocity = 0;
     }
 }

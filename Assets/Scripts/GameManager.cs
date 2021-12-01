@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator timer() {
         float time = 0;
+        Time.timeScale = 0;
         // ADD WHO WON
         while (time < gameOverDelay) {
             time += Time.deltaTime;
