@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 3204703035616635887}
   - component: {fileID: 5780386339391973038}
   - component: {fileID: 628483898906704494}
+  - component: {fileID: 2789725077601270359}
   m_Layer: 0
   m_Name: GodMode
   m_TagString: Pickupable
@@ -75,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 9054836659075623615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.66315395, y: 0.056211412, z: -0.57637787}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 2986198391840173842}
   m_Father: {fileID: 0}
@@ -120,8 +121,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0.012152195, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 334ee0c3cea85484a9e584bce9b44d61, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -162,9 +163,21 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.1
+  m_GravityScale: 0.01
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2789725077601270359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9054836659075623615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9687cd5ab9ec6c24499c90408f761073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

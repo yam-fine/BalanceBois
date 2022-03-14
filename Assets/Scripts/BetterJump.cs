@@ -9,6 +9,7 @@ public class BetterJump : MonoBehaviour
     Rigidbody2D rb;
     KeyCode jump;
 
+
     // Start is called before the first frame update
     void Start()
     {

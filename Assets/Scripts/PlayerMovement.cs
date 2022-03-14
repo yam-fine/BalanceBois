@@ -10,28 +10,34 @@ public class PlayerMovement : MonoBehaviour
 
     public KeyCode JumpKey { get { return jump; } }
 
-    private bool jumping = false;
+    private bool wantToJump = false;
     private float horizontalMove = 0f;
     CharacterController2D controller;
+    Animator anim;
 
     private void Start() {
         controller = GetComponent<CharacterController2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        horizontalMove = (Input.GetKey(left)) ? -1 : 0; //Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = (Input.GetKey(left)) ? -1 : 0;
         horizontalMove += (Input.GetKey(right)) ? 1 : 0;
 
         if (Input.GetKeyDown(jump))
         {
-            jumping = true;
+            wantToJump = true;
         }
+        if (horizontalMove != 0)
+            anim.SetBool("Walk", true);
+        else
+            anim.SetBool("Walk", false);
     }
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime * runSpeed, jumping);
-        jumping = false;
+        controller.Move(horizontalMove * Time.fixedDeltaTime * runSpeed, wantToJump);
+        wantToJump = false;
     }
 }
